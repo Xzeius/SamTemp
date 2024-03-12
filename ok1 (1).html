@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Sign-in Example</title>
+    <script src="https://alcdn.msauth.net/browser/2.15.0/js/msal-browser.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Set background image URL and properties */
+            background-image: url("sameer.jpg");  /* Replace with your image path */
+            background-size: cover;  /* Ensure image covers entire area */
+            background-position: center;  /* Center the image horizontally and vertically */
+            background-repeat: no-repeat;  /* Prevent image tiling */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-image: url("sameer.jpg");  /* Replace with your image path */
+            background-size: cover;  /* Ensure image covers entire area */
+            background-position: center;  /* Center the image horizontally and vertically */
+            background-repeat: no-repeat;  /* Prevent image tiling */
+            display: flex;
+            flex-direction: column; /* Added to arrange items in a column */
+            align-items: center; /* Center items horizontally */
+        }
+
+        h1 {
+            color: aqua;
+            margin-bottom: 20px; /* Added space below the heading */
+        }
+
+        button {
+            background-color: #33ddff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            background-color: transparent;
+            border: 5px solid #33ddff;
+        }
+
+        .logo {
+            width: 24px;
+            height: auto;
+            margin-right: 10px;
+        }
+    </style>
+    <script>
+        const msalConfig = {
+            auth: {
+                clientId: '7b3dbb0d-c878-4991-8235-4839a552b3d2',
+                redirectUri: 'https://xzeius.github.io/SamTemp/'
+            }
+        };
+
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        async function signIn() {
+            const loginRequest = {
+                scopes: ['openid', 'profile', 'User.Read']
+            };
+
+            try {
+                const response = await msalInstance.loginPopup(loginRequest);
+                console.log('Login successful:', response);
+                // Here you can redirect the user or perform other actions upon successful login
+            } catch (error) {
+                console.error('Login failed:', error);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to NoteShare.</h1>
+        <button onclick="signIn()">
+            <img src="Microsoft_logo.svg.png" alt="Microsoft Logo" class="logo">
+            Sign in with Microsoft
+        </button>
+    </div>
+</body>
+</html>
